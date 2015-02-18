@@ -50,6 +50,7 @@ void workerTask(int id, int maxLen)
   MPI_Get_count(&a_status, MPI_DOUBLE, &a_len);
   MPI_Get_count(&b_status, MPI_DOUBLE, &b_len);
 
+
   assert(a_len == b_len);
 
   partialResult=dotProduct(a, b, a_len);
@@ -57,7 +58,7 @@ void workerTask(int id, int maxLen)
   free(a);
   free(b);
 
-  //printf ("Hello, I am %d. My partial result is %f.\n", id, partialResult);
+  printf ("Hello, I am %d. My partial result is %f. My length was %d.\n", id, partialResult, a_len);
 
   MPI_Send(&partialResult, 1, MPI_DOUBLE, 0, 1, MPI_COMM_WORLD);
 }
@@ -142,7 +143,7 @@ int main (int argc, char **argv)
       partialResult=dotProduct(a, b, partitionLen);
 
 
-      //printf ("Hello, I am %d. My partial result is %f.\n", myid, partialResult);
+      printf ("Hello, I am %d. My partial result is %f.\n", myid, partialResult);
 
       //combine results
       result=partialResult;
