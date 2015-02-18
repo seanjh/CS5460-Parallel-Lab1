@@ -5,6 +5,7 @@
 #include <time.h>
 #include <mpi.h>
 #include <unistd.h>
+#include <string.h>
 
 
 // MPI_Recv(recv_buff, buff_size, MPI_CHAR, MPI_ANY_SOURCE, 
@@ -46,6 +47,17 @@ void workerTask(int id, int maxLen)
   b = (double *)malloc(maxLen * sizeof(double));
   MPI_Recv(a, maxLen, MPI_DOUBLE, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &a_status);
   MPI_Recv(b, maxLen, MPI_DOUBLE, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &b_status);
+
+  char err[128];
+  int r;
+  memset(err, 0, 128);
+
+  MPI_Error_string(a_status.MPI_ERROR, err, &r);
+  printf("a status: %d: %s\n",a_status.MPI_ERROR, err);
+
+  memset(err, 0, 128);
+  MPI_Error_string(b_status.MPI_ERROR, err, &r);
+  printf("b status: %d: %s\n",b_status.MPI_ERROR, err);
 
   MPI_Get_count(&a_status, MPI_DOUBLE, &a_len);
   MPI_Get_count(&b_status, MPI_DOUBLE, &b_len);
