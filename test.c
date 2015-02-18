@@ -141,7 +141,7 @@ int main (int argc, char **argv)
 
       partialResult=dotProduct(a, b, partitionLen);
       free(a);
-      free(b);m
+      free(b);
 
       //printf ("Hello, I am %d. My partial result is %f.\n", myid, partialResult);
 
