@@ -7,6 +7,9 @@ HELLO_OBJ = $(patsubst %,$(ODIR)/%,$(_HELLO_OBJ))
 _PROFILE_OBJ = mpi-profile.o
 PROFILE_OBJ = $(patsubst %,$(ODIR)/%,$(_PROFILE_OBJ))
 
+_TEST_OBJ = test.o
+TEST_OBJ = $(patsubst %,$(ODIR)/%,$(_TEST_OBJ))
+
 obj:
 	mkdir -p $@
 
@@ -19,7 +22,10 @@ hello: $(HELLO_OBJ)
 profile: $(PROFILE_OBJ)
 	$(CC) -o $@ $^
 
+test: $(TEST_OBJ)
+	$(CC) -o $@ $^
+
 .PHONY: clean
 
 clean:
-	rm -f $(ODIR)/*.o hello profile
+	rm -f $(ODIR)/*.o hello profile test

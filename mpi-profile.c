@@ -16,6 +16,9 @@ int getRandomInt (int max)
   return rand() % max;
 }
 
+
+//this is potentially unsafe
+//we should be passing in a length associated with arrays
 uint64_t dotProduct (int * a, int * b)
 {
   int len = sizeof(a) / sizeof(a[0]);
@@ -31,6 +34,8 @@ uint64_t dotProduct (int * a, int * b)
   return sum;
 }
 
+//this is potentially unsafe
+//we should be passing in a length associated with arrays
 void populateVectors (int * a, int * b)
 {
   int i;
