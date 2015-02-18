@@ -7,7 +7,10 @@ HELLO_OBJ = $(patsubst %,$(ODIR)/%,$(_HELLO_OBJ))
 _PROFILE_OBJ = mpi-profile.o
 PROFILE_OBJ = $(patsubst %,$(ODIR)/%,$(_PROFILE_OBJ))
 
-$(ODIR)/%.o: %.c
+obj:
+	mkdir -p $@
+
+$(ODIR)/%.o: %.c | obj
 	$(CC) -c -o $@ $<
 
 hello: $(HELLO_OBJ)
