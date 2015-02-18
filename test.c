@@ -167,8 +167,10 @@ int main (int argc, char **argv)
     //receive data and compute partial results
     else 
     {
+
       assert(testLen % sz == 0);
       int partitionLen = testLen/sz;
+      printf("Size: %d, TestLen: %d, PartitionLen: %d\n", testLen, sz, partitionLen);
       workerTask(myid, partitionLen);
     }
   }
