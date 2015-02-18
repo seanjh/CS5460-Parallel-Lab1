@@ -140,8 +140,7 @@ int main (int argc, char **argv)
       double partialResult;
 
       partialResult=dotProduct(a, b, partitionLen);
-      free(a);
-      free(b);
+
 
       //printf ("Hello, I am %d. My partial result is %f.\n", myid, partialResult);
 
@@ -154,6 +153,9 @@ int main (int argc, char **argv)
       }
 
       endtime = MPI_Wtime();
+
+      free(a);
+      free(b);
 
       printf ("Distributed results: %f\n", result);
       printf("Computed in %0.4f ms \n", (endtime-starttime) * 1000);
