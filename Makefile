@@ -1,0 +1,22 @@
+CC=mpicc
+ODIR=obj
+
+_HELLO_OBJ = hello.o
+HELLO_OBJ = $(patsubst %,$(ODIR)/%,$(_HELLO_OBJ))
+
+_PROFILE_OBJ = mpi-profile.o
+PROFILE_OBJ = $(patsubst %,$(ODIR)/%,$(_PROFILE_OBJ))
+
+$(ODIR)/%.o: %.c
+	$(CC) -c -o $@ $<
+
+hello: $(HELLO_OBJ)
+	$(CC) -o $@ $^
+
+profile: $(PROFILE_OBJ)
+	$(CC) -o $@ $^
+
+.PHONY: clean
+
+clean:
+	rm -f $(ODIR)/*.o hello profile
