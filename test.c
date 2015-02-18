@@ -68,7 +68,6 @@ int main (int argc, char **argv)
 {
   
   int sz, myid, ai;
-  int testLen, testIterations;
 
   MPI_Init(&argc, &argv);
 
@@ -83,8 +82,8 @@ int main (int argc, char **argv)
     exit(1);
   }
 
-  testLen = atoi(argv[1]);
-  testIterations = atoi(argv[2]);
+  const int testLen = atoi(argv[1]); 
+  const int testIterations = atoi(argv[2]);
   //printf("testLen=%d\n", testLen);
 
   int j;
@@ -131,9 +130,9 @@ int main (int argc, char **argv)
         double *a_src = a + (i*partitionLen);
         double *b_src = b + (i*partitionLen);
 
-        //printf("Sending data to %d\n", i);
+        printf("Sending %d doubles to %d\n", partitionLen, i);
         MPI_Send(a_src, partitionLen, MPI_DOUBLE, i, 1, MPI_COMM_WORLD);
-        //printf("Sending data to %d\n", i);
+        printf("Sending %d doubles to %d\n", partitionLen, i);
         MPI_Send(b_src, partitionLen, MPI_DOUBLE, i, 1, MPI_COMM_WORLD);
       }
 
