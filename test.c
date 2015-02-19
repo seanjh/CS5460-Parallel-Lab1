@@ -6,6 +6,7 @@
 #include <mpi.h>
 #include <unistd.h>
 #include <string.h>
+#include <math.h>
 
 
 // MPI_Recv(recv_buff, buff_size, MPI_CHAR, MPI_ANY_SOURCE, 
@@ -20,6 +21,43 @@
 //    int b_len;
 //    double vectorBuffer[];
 // } DotProductDescription;
+
+typedef double (*seqOp)(double, double);
+typedef double (*reduceOp)(double, double);
+
+double mult(double a, double b)
+{
+  return a*b;
+}
+
+double sum(double a, double b)
+{
+  return a+b;
+}
+
+double aggregate( double *a, 
+                  double *b, 
+                  int len, 
+                  double (*seqOp)(double, double),
+                  double (*reduceOp)(double, double))
+{
+  int i;
+  double result = 0.0;
+  for (i=0; i<len; i++)
+    result = reduceOp(result, seqOp(a[i], b[i]));
+  return result;
+}
+
+double dotProductAgg(double *a, double *b, int len)
+{
+  // int i;
+  // double result = 0.0;
+  // for (i=0; i<len; i++)
+  //   result += a[i]*b[i];
+  // return result;
+  //return aggregate(a, b, len, &pow, &sum);
+  return aggregate(a, b, len, &mult, &sum);
+}
 
 double dotProduct(double *a, double *b, int len)
 {
@@ -63,6 +101,7 @@ void workerTask(int id, int maxLen)
   MPI_Get_count(&b_status, MPI_DOUBLE, &b_len);
 
 
+  assert(maxLen == a_len);
   assert(a_len == b_len);
 
   partialResult=dotProduct(a, b, a_len);
@@ -70,7 +109,7 @@ void workerTask(int id, int maxLen)
   free(a);
   free(b);
 
-  printf ("Hello, I am %d. My partial result is %f. My length was %d.\n", id, partialResult, a_len);
+  // printf ("Hello, I am %d. My partial result is %f. My length was %d.\n", id, partialResult, a_len);
 
   MPI_Send(&partialResult, 1, MPI_DOUBLE, 0, 1, MPI_COMM_WORLD);
 }
@@ -99,6 +138,9 @@ int main (int argc, char **argv)
   //printf("testLen=%d\n", testLen);
 
   int j;
+
+  srand((unsigned)time(NULL));
+
   for(j=0;j<testIterations;j++)
   {
   
@@ -114,7 +156,7 @@ int main (int argc, char **argv)
       double *a = (double *)malloc(testLen * sizeof(double));
       double *b = (double *)malloc(testLen * sizeof(double));
 
-      srand((unsigned)time(NULL));
+      
 
       for(i=0; i<testLen; i++)
       {
@@ -142,9 +184,9 @@ int main (int argc, char **argv)
         double *a_src = a + (i*partitionLen);
         double *b_src = b + (i*partitionLen);
 
-        printf("Sending %d doubles to %d\n", partitionLen, i);
+        // printf("Sending %d doubles to %d\n", partitionLen, i);
         MPI_Send(a_src, partitionLen, MPI_DOUBLE, i, 1, MPI_COMM_WORLD);
-        printf("Sending %d doubles to %d\n", partitionLen, i);
+        // printf("Sending %d doubles to %d\n", partitionLen, i);
         MPI_Send(b_src, partitionLen, MPI_DOUBLE, i, 1, MPI_COMM_WORLD);
       }
 
@@ -154,7 +196,7 @@ int main (int argc, char **argv)
       partialResult=dotProduct(a, b, partitionLen);
 
 
-      printf ("Hello, I am %d. My partial result is %f.\n", myid, partialResult);
+      // printf ("Hello, I am %d. My partial result is %f.\n", myid, partialResult);
 
       //combine results
       result=partialResult;
@@ -181,7 +223,7 @@ int main (int argc, char **argv)
 
       assert(testLen % sz == 0);
       int partitionLen = testLen/sz;
-      printf("Size: %d, TestLen: %d, PartitionLen: %d\n", testLen, sz, partitionLen);
+      // printf("Size: %d, TestLen: %d, PartitionLen: %d\n", testLen, sz, partitionLen);
       workerTask(myid, partitionLen);
     }
   }
