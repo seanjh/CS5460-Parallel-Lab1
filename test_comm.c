@@ -79,9 +79,8 @@ int main (int argc, char **argv)
   MPI_Barrier(MPI_COMM_WORLD);
 
   // Bandwidth
-  char *out_buff
-  char *in_buff;
-  
+  char  *out_buff = (char *)  malloc(1000000000 * sizeof(char));
+  char  *in_buff  = (char *)  malloc(1000000000 * sizeof(char)); 
 
   // send packets continuously for 10 seconds
   double duration = 10.0;
@@ -98,10 +97,7 @@ int main (int argc, char **argv)
     if (is_sender) {
       printf("#%d: Sending packets between %d and %d for %0.1f seconds. ", myid, myid, partner, duration);
       printf("Packet size %d bytes.\n", packet_sizes[i]);
-    }
-
-    out_buff = (char*)malloc(packet_sizes[i]*sizeof(char));
-    in_buff = (char*)malloc(packet_sizes[i]*sizeof(char));
+    }   
 
     MPI_Barrier(MPI_COMM_WORLD);
     starttime = MPI_Wtime();
@@ -113,35 +109,31 @@ int main (int argc, char **argv)
     }
 
     while (endtime - starttime < duration) {
-    // endtime = MPI_Wtime();
-    if (is_sender) {
-      MPI_Send(&out_buff, packet_sizes[i], MPI_CHAR, partner, tag, MPI_COMM_WORLD);
-      // MPI_Recv(&inVal, 1, MPI_CHAR, partner, tag, MPI_COMM_WORLD, &status);
-      bytes_transferred += 1;
-    } else {
-      MPI_Recv(&in_buff, packet_sizes[i], MPI_CHAR, partner, tag, MPI_COMM_WORLD, &status);
-      // MPI_Send(&outVal, 1, MPI_CHAR, partner, tag, MPI_COMM_WORLD);
-    }
-    endtime = MPI_Wtime();
-    iter++;
-    
-    // printf("\t#%d: Starttime is %f, Endtime is %f. Difference is %f\n", myid, starttime, endtime, endtime-starttime);
-    // printf("\t\t#%d: %0.10fs elapsed \n", myid, endtime - starttime);  
-    
+      // endtime = MPI_Wtime();
+      if (is_sender) {
+        MPI_Send(out_buff, packet_sizes[i], MPI_CHAR, partner, tag, MPI_COMM_WORLD);
+      } else {
+        MPI_Recv(in_buff, packet_sizes[i], MPI_CHAR, partner, tag, MPI_COMM_WORLD, &status);
+        bytes_transferred += packet_sizes[i];
+      }
+      endtime = MPI_Wtime();
+      iter++;
+      // printf("\t#%d: Starttime is %f, Endtime is %f. Difference is %f\n", myid, starttime, endtime, endtime-starttime);
+      // printf("\t\t#%d: %0.10fs elapsed \n", myid, endtime - starttime);  
     }
 
-    if (is_sender) {
-    printf("\t#%d: completed after %d iterations.\n", 
-    myid, iter);
-    printf("\t#%d: Time elapsed: %0.8f seconds. Bytes transferred: %d\n", 
-      myid, endtime - starttime, bytes_transferred);
-    printf("\t#%d: %0.5f bytes / second\n",
-      myid, bytes_transferred / (endtime - starttime));
+    if (!is_sender) {
+      printf("\t#%d: completed after %d iterations.\n", 
+        myid, iter);
+      printf("\t#%d: Time elapsed: %0.8f seconds. Bytes transferred: %d\n", 
+        myid, endtime - starttime, bytes_transferred);
+      printf("\t#%d: %0.5f bytes / second\n",
+        myid, bytes_transferred / (endtime - starttime));
     }
-
-    free(out_buff);
-    free(in_buff);
   }
+
+  free(out_buff);
+  free(in_buff);
 
   // printf("\t#%d: completed after %d iterations. Time elapsed: %0.8f seconds. Bytes transferred: %d\n", 
   //   myid, iter, endtime - starttime, bytes_transferred);
