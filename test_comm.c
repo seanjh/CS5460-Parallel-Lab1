@@ -12,7 +12,7 @@ void pair_processes(int id, int *partner, bool *is_sender, int world_size)
     *is_sender = true;
     *partner = id + 1;
   } else {
-    is_sender = false;
+    *is_sender = false;
     *partner = id - 1;
   }
   // printf("Process #%d is paired with process #%d\n", id, *partner);
