@@ -26,6 +26,8 @@ int main (int argc, char **argv)
   MPI_Comm_rank (MPI_COMM_WORLD, &myid);
   tag = 1;
 
+  // Latency
+
   int testIterations;
   parse_cli_args(argc, argv, myid, &testIterations);
 
@@ -42,13 +44,18 @@ int main (int argc, char **argv)
     is_sender = false;
   }
 
+  if (is_sender) {
+   printf("#%d: LATENCY TEST.\n", myid);
+   printf("#%d: Sending %d total %d byte messages between %d and %d\n", myid, testIterations, 1, myid, partner);
+  }
+
   double starttime, endtime, total_time;
   MPI_Status status;
   
   char inVal, outVal = 'a';
+    
+  MPI_Barrier(MPI_COMM_WORLD);
   int count;
-
-  
   for (count = testIterations; count > 0; count--) {
     if (is_sender) {
       starttime = MPI_Wtime();
@@ -62,13 +69,84 @@ int main (int argc, char **argv)
     }
   }
 
-  MPI_Barrier(MPI_COMM_WORLD);
-
   if (is_sender) {
     double average_latency = total_time / testIterations / 2;
-    printf("Average latency between process %d and %d after %d messages is %0.6f µs\n", 
-      myid, partner, testIterations, average_latency * 1000000);
+    printf("\t#%d: Average latency between process %d and %d after %d messages is %0.6f µs\n", 
+      myid, myid, partner, testIterations, average_latency * 1000000);
   }
+
+  
+  MPI_Barrier(MPI_COMM_WORLD);
+
+  // Bandwidth
+  char *out_buff
+  char *in_buff;
+  
+
+  // send packets continuously for 10 seconds
+  double duration = 10.0;
+  int bytes_transferred = 0;
+  int iter = 0;
+
+  if (is_sender) {
+   printf("#%d: BANDWIDTH TEST.\n", myid);
+  }
+  
+  int packet_sizes[4] = {1, 1000, 1000000, 1000000000};
+  int i;
+  for (i=0; i<4; i++) {
+    if (is_sender) {
+      printf("#%d: Sending packets between %d and %d for %0.1f seconds. ", myid, myid, partner, duration);
+      printf("Packet size %d bytes.\n", packet_sizes[i]);
+    }
+
+    out_buff = (char*)malloc(packet_sizes[i]*sizeof(char));
+    in_buff = (char*)malloc(packet_sizes[i]*sizeof(char));
+
+    MPI_Barrier(MPI_COMM_WORLD);
+    starttime = MPI_Wtime();
+    endtime = MPI_Wtime();
+    MPI_Barrier(MPI_COMM_WORLD);
+    if (endtime < starttime) {
+      printf("\t#%d: Invalid MPI_Wtime entries\n", myid);
+      exit(EXIT_FAILURE);
+    }
+
+    while (endtime - starttime < duration) {
+    // endtime = MPI_Wtime();
+    if (is_sender) {
+      MPI_Send(&out_buff, packet_sizes[i], MPI_CHAR, partner, tag, MPI_COMM_WORLD);
+      // MPI_Recv(&inVal, 1, MPI_CHAR, partner, tag, MPI_COMM_WORLD, &status);
+      bytes_transferred += 1;
+    } else {
+      MPI_Recv(&in_buff, packet_sizes[i], MPI_CHAR, partner, tag, MPI_COMM_WORLD, &status);
+      // MPI_Send(&outVal, 1, MPI_CHAR, partner, tag, MPI_COMM_WORLD);
+    }
+    endtime = MPI_Wtime();
+    iter++;
+    
+    // printf("\t#%d: Starttime is %f, Endtime is %f. Difference is %f\n", myid, starttime, endtime, endtime-starttime);
+    // printf("\t\t#%d: %0.10fs elapsed \n", myid, endtime - starttime);  
+    
+    }
+
+    if (is_sender) {
+    printf("\t#%d: completed after %d iterations.\n", 
+    myid, iter);
+    printf("\t#%d: Time elapsed: %0.8f seconds. Bytes transferred: %d\n", 
+      myid, endtime - starttime, bytes_transferred);
+    printf("\t#%d: %0.5f bytes / second\n",
+      myid, bytes_transferred / (endtime - starttime));
+    }
+
+    free(out_buff);
+    free(in_buff);
+  }
+
+  // printf("\t#%d: completed after %d iterations. Time elapsed: %0.8f seconds. Bytes transferred: %d\n", 
+  //   myid, iter, endtime - starttime, bytes_transferred);
+  // printf("\t#%d: finished\n", myid);
+
 
   MPI_Finalize();
 
