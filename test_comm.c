@@ -66,14 +66,14 @@ int main (int argc, char **argv)
     } else {
       MPI_Recv(&recvtime, 1, MPI_DOUBLE, partner, tag, MPI_COMM_WORLD, &status);
       endtime = MPI_Wtime();
-      // printf("\t\t#%d: Received from %d after %f \n", myid, partner, endtime - recvtime);
-      totaltime += MPI_Wtime() - recvtime;
+      totaltime += endtime - recvtime;
+      printf("\t\t#%d: Received from %d after %f (%f total) \n", myid, partner, endtime - recvtime, totaltime);
       // MPI_Send(&outVal, 1, MPI_CHAR, partner, tag, MPI_COMM_WORLD);
     }
   }
 
   if (!is_sender) {
-    double average_latency = total_time / (double) testIterations;
+    double average_latency = total_time / testIterations;
     printf("\t#%d: Average latency between process %d and %d after %d messages is %0.6f µs\n", 
       myid, partner, myid, testIterations, average_latency * 1000000);
   }
@@ -120,11 +120,13 @@ int main (int argc, char **argv)
     while (endtime - starttime < duration) {
       // endtime = MPI_Wtime();
       if (is_sender) {
-        MPI_Send(out_buff, packet_sizes[i], MPI_CHAR, partner, tag, MPI_COMM_WORLD);
+        MPI_Send(out_buff, packet_sizes[i], MPI_CHAR, partner, tag, 
+          MPI_COMM_WORLD);
       } else {
-        MPI_Recv(in_buff, packet_sizes[i], MPI_CHAR, partner, tag, MPI_COMM_WORLD, &status);
+        MPI_Recv(in_buff, packet_sizes[i], MPI_CHAR, partner, tag, 
+          MPI_COMM_WORLD, &status);
         bytes_transferred += packet_sizes[i];
-        MPI_Get_count(&status, MPI_DOUBLE, &len);
+        MPI_Get_count(&status, MPI_CHAR, &len);
         printf("MPI_Get_count length: %d\n", len);
         printf("Value of MPI_UNDEFINED is %d\n", MPI_UNDEFINED);
         MPI_Error_string(status.MPI_ERROR, err, &r);
@@ -149,11 +151,6 @@ int main (int argc, char **argv)
 
   free(out_buff);
   free(in_buff);
-
-  // printf("\t#%d: completed after %d iterations. Time elapsed: %0.8f seconds. Bytes transferred: %d\n", 
-  //   myid, iter, endtime - starttime, bytes_transferred);
-  // printf("\t#%d: finished\n", myid);
-
 
   MPI_Finalize();
 
