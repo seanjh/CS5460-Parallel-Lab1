@@ -27,6 +27,8 @@ typedef double (*reduceOp)(double, double);
 
 #define ERR_BUFF_SIZE 1024
 
+#define PRECISION .000001
+
 double mult(double a, double b)
 {
   return a*b;
@@ -92,18 +94,25 @@ void workerTask(int id, int maxLen)
   int r;
   
   memset(err, 0, ERR_BUFF_SIZE);
-  MPI_Error_string(a_status.MPI_ERROR, err, &r);
-  printf("a status: %d: %d: %s\n",a_status.MPI_ERROR, r, err);
+  if(a_status.MPI_ERROR != MPI_SUCCESS)
+  {
+    MPI_Error_string(a_status.MPI_ERROR, err, &r);
+    printf("a status: %d: %d: %s\n",a_status.MPI_ERROR, r, err);
+  }
 
   memset(err, 0, ERR_BUFF_SIZE);
-  MPI_Error_string(b_status.MPI_ERROR, err, &r);
-  printf("b status: %d: %d: %s\n",b_status.MPI_ERROR, r, err);
+
+  if(b_status.MPI_ERROR != MPI_SUCCESS)
+  {
+    MPI_Error_string(b_status.MPI_ERROR, err, &r);
+    printf("b status: %d: %d: %s\n",b_status.MPI_ERROR, r, err);
+  }
 
   MPI_Get_count(&a_status, MPI_DOUBLE, &a_len);
   MPI_Get_count(&b_status, MPI_DOUBLE, &b_len);
 
-  printf("a length: %d\n",a_len);
-  printf("b length: %d\n",b_len);
+  //printf("a length: %d\n",a_len);
+  //printf("b length: %d\n",b_len);
 
   assert(maxLen == a_len);
   assert(a_len == b_len);
@@ -168,14 +177,14 @@ int main (int argc, char **argv)
         b[i]=((double)rand()/(double)RAND_MAX);
       }
 
-      double result;
+      double localResult, distributedResult;
 
       double starttime, endtime;
 
       starttime = MPI_Wtime();
-      result=dotProduct(a, b, testLen);
+      localResult=dotProduct(a, b, testLen);
       endtime = MPI_Wtime();
-      printf("Single result: %f\n", result);
+      printf("Local result: %f\n", localResult);
       printf("Computed in %0.4f ms \n", (endtime-starttime) * 1000);
 
       //distribute
@@ -203,11 +212,11 @@ int main (int argc, char **argv)
       // printf ("Hello, I am %d. My partial result is %f.\n", myid, partialResult);
 
       //combine results
-      result=partialResult;
+      distributedResult=partialResult;
       for(i=1; i<sz; i++)
       {
         MPI_Recv(&partialResult, 1, MPI_DOUBLE, i, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        result += partialResult;
+        distributedResult += partialResult;
       }
 
       endtime = MPI_Wtime();
@@ -215,7 +224,7 @@ int main (int argc, char **argv)
       free(a);
       free(b);
 
-      printf ("Distributed results: %f\n", result);
+      printf ("Distributed result: %f\n", distributedResult);
       printf("Computed in %0.4f ms \n", (endtime-starttime) * 1000);
 
       sleep(2);
@@ -227,7 +236,7 @@ int main (int argc, char **argv)
 
       assert(testLen % sz == 0);
       int partitionLen = testLen/sz;
-      // printf("Size: %d, TestLen: %d, PartitionLen: %d\n", testLen, sz, partitionLen);
+      //printf("Size: %d, TestLen: %d, PartitionLen: %d\n", sz, testLen, partitionLen);
       workerTask(myid, partitionLen);
     }
   }
