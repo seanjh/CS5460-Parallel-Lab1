@@ -34,6 +34,7 @@ examples/
 hello
 profile
 test
+test_comm
 
 # Sublime Text
 *.sublime*

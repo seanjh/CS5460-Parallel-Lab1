@@ -28,7 +28,7 @@ profile: $(PROFILE_OBJ)
 test: $(TEST_OBJ)
 	$(CC) -o $@ $^
 
-test: $(TEST_COMM_OBJ)
+test_comm: $(TEST_COMM_OBJ)
 	$(CC) -o $@ $^
 
 .PHONY: clean
