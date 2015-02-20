@@ -50,7 +50,7 @@ int main (int argc, char **argv)
    printf("#%d: Sending %d total %d byte messages between %d and %d\n", myid, testIterations, 1, myid, partner);
   }
 
-  double starttime, endtime, total_time;
+  double starttime, endtime;
   double sendtime, recvtime, totaltime;
   MPI_Status status;
     
@@ -73,7 +73,7 @@ int main (int argc, char **argv)
   }
 
   if (!is_sender) {
-    double average_latency = total_time / testIterations;
+    double average_latency = totaltime / testIterations;
     printf("\t#%d: Average latency between process %d and %d after %d messages is %0.6f µs\n", 
       myid, partner, myid, testIterations, average_latency * 1000000);
   }
