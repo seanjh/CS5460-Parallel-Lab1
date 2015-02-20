@@ -13,6 +13,7 @@
 #define MEDIUM_PACKET       1000000
 #define LARGE_PACKET        1000000000
 #define BYTES_IN_BUFFER     1000000000
+#define PACKET_ARRAY_LEN    4
 
 void parse_cli_args(int argc, char **argv, int myid, int *iter)
 {
@@ -97,8 +98,7 @@ int main (int argc, char **argv)
   }
   
   int message_count = 0;
-  const int len = 4;
-  int packet_sizes[len] = {
+  int packet_sizes[PACKET_ARRAY_LEN] = {
     EXTRA_SMALL_PACKET,
     SMALL_PACKET,
     MEDIUM_PACKET,
@@ -107,7 +107,7 @@ int main (int argc, char **argv)
 
   int i, iter_count;
   unsigned long long j;
-  for (i=0; i<len; i++) {
+  for (i=0; i<PACKET_ARRAY_LEN; i++) {
     if (is_sender) {
       printf("#%d: Sending %ld total MB between %d and %d. ", 
         myid,  TRANSFER_TOTAL / BYES_TO_MEGABYTES, myid, partner);
@@ -135,11 +135,11 @@ int main (int argc, char **argv)
     assert(iter_count == TRANSFER_TOTAL / packet_sizes[i]);
 
     if (!is_sender) {
-      printf("\t#%d: Time elapsed: %0.8f seconds. Megabytes transferred: %0.8f\n", 
+      printf("\t#%d: Time elapsed: %0.8f seconds. Total MB transferred: %0.8f\n", 
         myid, 
         endtime - starttime, 
         (double) TRANSFER_TOTAL / BYES_TO_MEGABYTES);
-      printf("\t#%d: %0.5f Megabytes / second\n",
+      printf("\t#%d: %0.5f MB / second\n",
         myid, 
         (double) TRANSFER_TOTAL / (endtime-starttime) / BYES_TO_MEGABYTES);
     }
