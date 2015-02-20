@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include <assert.h>
 #include <mpi.h>
 
@@ -50,37 +51,39 @@ int main (int argc, char **argv)
   }
 
   double starttime, endtime, total_time;
+  double sendtime, recvtime, totaltime;
   MPI_Status status;
-  
-  char inVal, outVal = 'a';
     
   MPI_Barrier(MPI_COMM_WORLD);
   int count;
   for (count = testIterations; count > 0; count--) {
     if (is_sender) {
-      starttime = MPI_Wtime();
-      MPI_Send(&outVal, 1, MPI_CHAR, partner, tag, MPI_COMM_WORLD);
-      MPI_Recv(&inVal, 1, MPI_CHAR, partner, tag, MPI_COMM_WORLD, &status);
-      endtime = MPI_Wtime();
-      total_time += (endtime-starttime);
+      sendtime = MPI_Wtime();
+      MPI_Send(&sendtime, 1, MPI_DOUBLE, partner, tag, MPI_COMM_WORLD);
+      // MPI_Recv(&inVal, 1, MPI_CHAR, partner, tag, MPI_COMM_WORLD, &status);
+      // endtime = MPI_Wtime();
+      // total_time += (endtime-starttime);
     } else {
-      MPI_Recv(&inVal, 1, MPI_CHAR, partner, tag, MPI_COMM_WORLD, &status);
-      MPI_Send(&outVal, 1, MPI_CHAR, partner, tag, MPI_COMM_WORLD);
+      MPI_Recv(&recvtime, 1, MPI_DOUBLE, partner, tag, MPI_COMM_WORLD, &status);
+      endtime = MPI_Wtime();
+      // printf("\t\t#%d: Received from %d after %f \n", myid, partner, endtime - recvtime);
+      totaltime += MPI_Wtime() - recvtime;
+      // MPI_Send(&outVal, 1, MPI_CHAR, partner, tag, MPI_COMM_WORLD);
     }
   }
 
-  if (is_sender) {
-    double average_latency = total_time / testIterations / 2;
+  if (!is_sender) {
+    double average_latency = total_time / (double) testIterations;
     printf("\t#%d: Average latency between process %d and %d after %d messages is %0.6f µs\n", 
-      myid, myid, partner, testIterations, average_latency * 1000000);
+      myid, partner, myid, testIterations, average_latency * 1000000);
   }
 
   
   MPI_Barrier(MPI_COMM_WORLD);
 
   // Bandwidth
-  char  *out_buff = (char *)  malloc(1000000000 * sizeof(char));
-  char  *in_buff  = (char *)  malloc(1000000000 * sizeof(char)); 
+  char  *out_buff = (char *)  malloc(10000000000 * sizeof(char));
+  char  *in_buff  = (char *)  malloc(10000000000 * sizeof(char)); 
 
   // send packets continuously for 10 seconds
   double duration = 10.0;
@@ -91,12 +94,18 @@ int main (int argc, char **argv)
    printf("#%d: BANDWIDTH TEST.\n", myid);
   }
   
-  unsigned long long int packet_sizes[4] = {1, 1000, 1000000, 1000000000};
+  // MPI_Status status;
+  int len = 0;
+  int packet_sizes[4] = {1, 1000, 1000000, 1000000000};
+  char err[128];
+  int r;
+  memset(err, 0, 128);
+
   int i;
   for (i=0; i<4; i++) {
     if (is_sender) {
       printf("#%d: Sending packets between %d and %d for %0.1f seconds. ", myid, myid, partner, duration);
-      printf("Packet size %llu bytes.\n", packet_sizes[i]);
+      printf("Packet size %d bytes.\n", packet_sizes[i]);
     }   
 
     MPI_Barrier(MPI_COMM_WORLD);
@@ -115,6 +124,12 @@ int main (int argc, char **argv)
       } else {
         MPI_Recv(in_buff, packet_sizes[i], MPI_CHAR, partner, tag, MPI_COMM_WORLD, &status);
         bytes_transferred += packet_sizes[i];
+        MPI_Get_count(&status, MPI_DOUBLE, &len);
+        printf("MPI_Get_count length: %d\n", len);
+        printf("Value of MPI_UNDEFINED is %d\n", MPI_UNDEFINED);
+        MPI_Error_string(status.MPI_ERROR, err, &r);
+        printf("a status: %d: %s\n",status.MPI_ERROR, err);
+        assert(len == packet_sizes[i]);
       }
       endtime = MPI_Wtime();
       iter++;
