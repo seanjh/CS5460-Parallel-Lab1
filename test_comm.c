@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <assert.h>
-#include <string.h>
 #include <mpi.h>
 
 void parse_cli_args(int argc, char **argv, int myid, int *iter)
@@ -43,10 +42,6 @@ int main (int argc, char **argv)
     is_sender = false;
   }
 
-  // if (is_sender) {
-  //   printf("Process #%d is a sender\n", myid);
-  // }
-
   double starttime, endtime, total_time;
   MPI_Status status;
   
@@ -68,7 +63,7 @@ int main (int argc, char **argv)
   }
 
   MPI_Barrier(MPI_COMM_WORLD);
-  
+
   if (is_sender) {
     double average_latency = total_time / testIterations / 2;
     printf("Average latency between process %d and %d after %d messages is %0.6f µs\n", 
