@@ -84,19 +84,19 @@ int main (int argc, char **argv)
 
   // send packets continuously for 10 seconds
   double duration = 10.0;
-  int bytes_transferred = 0;
+  unsigned long long int bytes_transferred = 0;
   int iter = 0;
 
   if (is_sender) {
    printf("#%d: BANDWIDTH TEST.\n", myid);
   }
   
-  int packet_sizes[4] = {1, 1000, 1000000, 1000000000};
+  unsigned long long int packet_sizes[4] = {1, 1000, 1000000, 1000000000};
   int i;
   for (i=0; i<4; i++) {
     if (is_sender) {
       printf("#%d: Sending packets between %d and %d for %0.1f seconds. ", myid, myid, partner, duration);
-      printf("Packet size %d bytes.\n", packet_sizes[i]);
+      printf("Packet size %llu bytes.\n", packet_sizes[i]);
     }   
 
     MPI_Barrier(MPI_COMM_WORLD);
@@ -118,18 +118,18 @@ int main (int argc, char **argv)
       }
       endtime = MPI_Wtime();
       iter++;
-      // printf("\t#%d: Starttime is %f, Endtime is %f. Difference is %f\n", myid, starttime, endtime, endtime-starttime);
-      // printf("\t\t#%d: %0.10fs elapsed \n", myid, endtime - starttime);  
     }
 
     if (!is_sender) {
       printf("\t#%d: completed after %d iterations.\n", 
         myid, iter);
-      printf("\t#%d: Time elapsed: %0.8f seconds. Bytes transferred: %d\n", 
-        myid, endtime - starttime, bytes_transferred);
-      printf("\t#%d: %0.5f bytes / second\n",
-        myid, bytes_transferred / (endtime - starttime));
+      printf("\t#%d: Time elapsed: %0.8f seconds. Megabytes transferred: %0.8f\n", 
+        myid, endtime - starttime, (double) bytes_transferred / 1000000);
+      printf("\t#%d: %0.5f Megabytes / second\n",
+        myid, (double) bytes_transferred / 1000000 / (endtime - starttime));
     }
+    MPI_Barrier(MPI_COMM_WORLD);
+
   }
 
   free(out_buff);
