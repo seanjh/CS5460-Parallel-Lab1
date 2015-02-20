@@ -34,3 +34,6 @@ examples/
 hello
 profile
 test
+
+# Sublime Text
+*.sublime*

@@ -10,6 +10,9 @@ PROFILE_OBJ = $(patsubst %,$(ODIR)/%,$(_PROFILE_OBJ))
 _TEST_OBJ = test.o
 TEST_OBJ = $(patsubst %,$(ODIR)/%,$(_TEST_OBJ))
 
+_TEST_COMM_OBJ = test_comm.o
+TEST_COMM_OBJ = $(patsubst %,$(ODIR)/%,$(_TEST_COMM_OBJ))
+
 obj:
 	mkdir -p $@
 
@@ -25,7 +28,10 @@ profile: $(PROFILE_OBJ)
 test: $(TEST_OBJ)
 	$(CC) -o $@ $^
 
+test: $(TEST_COMM_OBJ)
+	$(CC) -o $@ $^
+
 .PHONY: clean
 
 clean:
-	rm -f $(ODIR)/*.o hello profile test
+	rm -f $(ODIR)/*.o hello profile test test_comm
