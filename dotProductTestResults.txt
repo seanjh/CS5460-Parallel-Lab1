@@ -1,0 +1,201 @@
+make: `test' is up to date.
+....................
+Processes=2, Vector Size=32, Computation=dot
+Average Local Computation Duration: 0.000001
+Average Distributed Computation Duration: 0.000006
+Average Speedup: 0.094828
+....................
+Processes=4, Vector Size=32, Computation=dot
+Average Local Computation Duration: 0.000000
+Average Distributed Computation Duration: 0.000125
+Average Speedup: 0.003818
+....................
+Processes=8, Vector Size=32, Computation=dot
+Average Local Computation Duration: 0.000000
+Average Distributed Computation Duration: 0.000502
+Average Speedup: 0.000190
+....................
+Processes=16, Vector Size=32, Computation=dot
+Average Local Computation Duration: 0.000000
+Average Distributed Computation Duration: 0.000344
+Average Speedup: 0.000902
+....................
+Processes=2, Vector Size=1024, Computation=dot
+Average Local Computation Duration: 0.000004
+Average Distributed Computation Duration: 0.000029
+Average Speedup: 0.131387
+....................
+Processes=4, Vector Size=1024, Computation=dot
+Average Local Computation Duration: 0.000003
+Average Distributed Computation Duration: 0.000044
+Average Speedup: 0.071197
+....................
+Processes=8, Vector Size=1024, Computation=dot
+Average Local Computation Duration: 0.000004
+Average Distributed Computation Duration: 0.000440
+Average Speedup: 0.009369
+....................
+Processes=16, Vector Size=1024, Computation=dot
+Average Local Computation Duration: 0.000004
+Average Distributed Computation Duration: 0.000246
+Average Speedup: 0.015038
+....................
+Processes=2, Vector Size=32768, Computation=dot
+Average Local Computation Duration: 0.000096
+Average Distributed Computation Duration: 0.000124
+Average Speedup: 0.773516
+....................
+Processes=4, Vector Size=32768, Computation=dot
+Average Local Computation Duration: 0.000109
+Average Distributed Computation Duration: 0.000196
+Average Speedup: 0.553558
+....................
+Processes=8, Vector Size=32768, Computation=dot
+Average Local Computation Duration: 0.000123
+Average Distributed Computation Duration: 0.000329
+Average Speedup: 0.372702
+....................
+Processes=16, Vector Size=32768, Computation=dot
+Average Local Computation Duration: 0.000115
+Average Distributed Computation Duration: 0.000688
+Average Speedup: 0.166753
+....................
+Processes=2, Vector Size=1048576, Computation=dot
+Average Local Computation Duration: 0.003058
+Average Distributed Computation Duration: 0.004547
+Average Speedup: 0.672406
+....................
+Processes=4, Vector Size=1048576, Computation=dot
+Average Local Computation Duration: 0.003054
+Average Distributed Computation Duration: 0.003290
+Average Speedup: 0.928209
+....................
+Processes=8, Vector Size=1048576, Computation=dot
+Average Local Computation Duration: 0.004142
+Average Distributed Computation Duration: 0.003772
+Average Speedup: 1.097927
+....................
+Processes=16, Vector Size=1048576, Computation=dot
+Average Local Computation Duration: 0.003663
+Average Distributed Computation Duration: 0.006224
+Average Speedup: 0.588545
+....................
+Processes=2, Vector Size=33554432, Computation=dot
+Average Local Computation Duration: 0.102680
+Average Distributed Computation Duration: 0.149475
+Average Speedup: 0.686936
+....................
+Processes=4, Vector Size=33554432, Computation=dot
+Average Local Computation Duration: 0.102396
+Average Distributed Computation Duration: 0.168091
+Average Speedup: 0.609170
+....................
+Processes=8, Vector Size=33554432, Computation=dot
+Average Local Computation Duration: 0.135326
+Average Distributed Computation Duration: 0.214981
+Average Speedup: 0.629482
+....................
+Processes=16, Vector Size=33554432, Computation=dot
+Average Local Computation Duration: 0.124900
+Average Distributed Computation Duration: 0.278329
+Average Speedup: 0.448748
+....................
+Processes=2, Vector Size=32, Computation=pow
+Average Local Computation Duration: 0.000008
+Average Distributed Computation Duration: 0.000007
+Average Speedup: 1.142857
+....................
+Processes=4, Vector Size=32, Computation=pow
+Average Local Computation Duration: 0.000010
+Average Distributed Computation Duration: 0.000015
+Average Speedup: 0.662903
+....................
+Processes=8, Vector Size=32, Computation=pow
+Average Local Computation Duration: 0.000012
+Average Distributed Computation Duration: 0.000048
+Average Speedup: 0.245491
+....................
+Processes=16, Vector Size=32, Computation=pow
+Average Local Computation Duration: 0.000013
+Average Distributed Computation Duration: 0.000230
+Average Speedup: 0.058097
+....................
+Processes=2, Vector Size=1024, Computation=pow
+Average Local Computation Duration: 0.000101
+Average Distributed Computation Duration: 0.000062
+Average Speedup: 1.634615
+....................
+Processes=4, Vector Size=1024, Computation=pow
+Average Local Computation Duration: 0.000107
+Average Distributed Computation Duration: 0.000045
+Average Speedup: 2.381586
+....................
+Processes=8, Vector Size=1024, Computation=pow
+Average Local Computation Duration: 0.000120
+Average Distributed Computation Duration: 0.000249
+Average Speedup: 0.480616
+....................
+Processes=16, Vector Size=1024, Computation=pow
+Average Local Computation Duration: 0.000129
+Average Distributed Computation Duration: 0.000333
+Average Speedup: 0.387843
+....................
+Processes=2, Vector Size=32768, Computation=pow
+Average Local Computation Duration: 0.002833
+Average Distributed Computation Duration: 0.001502
+Average Speedup: 1.885436
+....................
+Processes=4, Vector Size=32768, Computation=pow
+Average Local Computation Duration: 0.002877
+Average Distributed Computation Duration: 0.000847
+Average Speedup: 3.395127
+....................
+Processes=8, Vector Size=32768, Computation=pow
+Average Local Computation Duration: 0.003681
+Average Distributed Computation Duration: 0.000686
+Average Speedup: 5.365604
+....................
+Processes=16, Vector Size=32768, Computation=pow
+Average Local Computation Duration: 0.003545
+Average Distributed Computation Duration: 0.001567
+Average Speedup: 2.262349
+....................
+Processes=2, Vector Size=1048576, Computation=pow
+Average Local Computation Duration: 0.089092
+Average Distributed Computation Duration: 0.047560
+Average Speedup: 1.873239
+....................
+Processes=4, Vector Size=1048576, Computation=pow
+Average Local Computation Duration: 0.089056
+Average Distributed Computation Duration: 0.024687
+Average Speedup: 3.607407
+....................
+Processes=8, Vector Size=1048576, Computation=pow
+Average Local Computation Duration: 0.118328
+Average Distributed Computation Duration: 0.017972
+Average Speedup: 6.584116
+....................
+Processes=16, Vector Size=1048576, Computation=pow
+Average Local Computation Duration: 0.113932
+Average Distributed Computation Duration: 0.121555
+Average Speedup: 0.937287
+....................
+Processes=2, Vector Size=33554432, Computation=pow
+Average Local Computation Duration: 2.857815
+Average Distributed Computation Duration: 1.524533
+Average Speedup: 1.874551
+....................
+Processes=4, Vector Size=33554432, Computation=pow
+Average Local Computation Duration: 2.865445
+Average Distributed Computation Duration: 0.856864
+Average Speedup: 3.344106
+....................
+Processes=8, Vector Size=33554432, Computation=pow
+Average Local Computation Duration: 3.814419
+Average Distributed Computation Duration: 0.761281
+Average Speedup: 5.010529
+....................
+Processes=16, Vector Size=33554432, Computation=pow
+Average Local Computation Duration: 3.590955
+Average Distributed Computation Duration: 2.846486
+Average Speedup: 1.261540
