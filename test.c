@@ -208,10 +208,13 @@ int main (int argc, char **argv)
       
 
       double starttime, endtime;
-
+      printf(".");
+      fflush(stdout);
       starttime = MPI_Wtime();
       localResults[j]=testOperation(a, b, testLen);
       endtime = MPI_Wtime();
+      printf(".");
+      fflush(stdout);
       //printf("Local result: %f\n", localResult);
       localDurations[j] = (endtime-starttime);
       //printf("Computed in %0.4f ms \n", (endtime-starttime) * 1000);
@@ -258,7 +261,7 @@ int main (int argc, char **argv)
       //printf ("Distributed result: %f\n", distributedResult);
       //printf("Computed in %0.4f ms \n", (endtime-starttime) * 1000);
 
-      sleep(2);
+      //sleep(2);
     } 
 
     //receive data and compute partial results
@@ -274,6 +277,7 @@ int main (int argc, char **argv)
 
   if(myid == 0)
   {
+    printf("\n");
     double avgLocalDuration=0.0;
     double avgDistributedDuration=0.0;
     double avgSpeedup;
