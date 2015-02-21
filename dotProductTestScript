@@ -1,0 +1,53 @@
+#!/bin/bash
+
+make test
+
+mpirun -np 2 ./test 32 10 dot
+mpirun -np 4 ./test 32 10 dot
+mpirun -np 8 ./test 32 10 dot
+mpirun -np 16 ./test 32 10 dot
+
+mpirun -np 2 ./test 1024 10 dot
+mpirun -np 4 ./test 1024 10 dot
+mpirun -np 8 ./test 1024 10 dot
+mpirun -np 16 ./test 1024 10 dot
+
+mpirun -np 2 ./test 32768 10 dot
+mpirun -np 4 ./test 32768 10 dot
+mpirun -np 8 ./test 32768 10 dot
+mpirun -np 16 ./test 32768 10 dot
+
+mpirun -np 2 ./test 1048576 10 dot
+mpirun -np 4 ./test 1048576 10 dot
+mpirun -np 8 ./test 1048576 10 dot
+mpirun -np 16 ./test 1048576 10 dot
+
+mpirun -np 2 ./test 33554432 10 dot
+mpirun -np 4 ./test 33554432 10 dot
+mpirun -np 8 ./test 33554432 10 dot
+mpirun -np 16 ./test 33554432 10 dot
+
+mpirun -np 2 ./test 32 10 pow
+mpirun -np 4 ./test 32 10 pow
+mpirun -np 8 ./test 32 10 pow
+mpirun -np 16 ./test 32 10 pow
+
+mpirun -np 2 ./test 1024 10 pow
+mpirun -np 4 ./test 1024 10 pow
+mpirun -np 8 ./test 1024 10 pow
+mpirun -np 16 ./test 1024 10 pow
+
+mpirun -np 2 ./test 32768 10 pow
+mpirun -np 4 ./test 32768 10 pow
+mpirun -np 8 ./test 32768 10 pow
+mpirun -np 16 ./test 32768 10 pow
+
+mpirun -np 2 ./test 1048576 10 pow
+mpirun -np 4 ./test 1048576 10 pow
+mpirun -np 8 ./test 1048576 10 pow
+mpirun -np 16 ./test 1048576 10 pow
+
+mpirun -np 2 ./test 33554432 10 pow
+mpirun -np 4 ./test 33554432 10 pow
+mpirun -np 8 ./test 33554432 10 pow
+mpirun -np 16 ./test 33554432 10 pow

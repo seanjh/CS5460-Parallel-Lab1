@@ -24,10 +24,13 @@
 
 typedef double (*seqOp)(double, double);
 typedef double (*reduceOp)(double, double);
+typedef double (*TestOperationType)(double *, double *, int);
+
+
 
 #define ERR_BUFF_SIZE 1024
 
-#define PRECISION .000001
+#define PRECISION 0.000001
 
 double mult(double a, double b)
 {
@@ -52,15 +55,15 @@ double aggregate( double *a,
   return result;
 }
 
-double dotProductAgg(double *a, double *b, int len)
+double powTestOp(double *a, double *b, int len)
 {
   // int i;
   // double result = 0.0;
   // for (i=0; i<len; i++)
   //   result += a[i]*b[i];
   // return result;
-  //return aggregate(a, b, len, &pow, &sum);
-  return aggregate(a, b, len, &mult, &sum);
+  return aggregate(a, b, len, &pow, &sum);
+  //return aggregate(a, b, len, &mult, &sum);
 }
 
 double dotProduct(double *a, double *b, int len)
@@ -72,6 +75,7 @@ double dotProduct(double *a, double *b, int len)
   return result;
 }
 
+TestOperationType testOperation;
 
 void workerTask(int id, int maxLen)
 {
@@ -117,7 +121,9 @@ void workerTask(int id, int maxLen)
   assert(maxLen == a_len);
   assert(a_len == b_len);
 
-  partialResult=dotProduct(a, b, a_len);
+
+
+  partialResult=testOperation(a, b, a_len);
 
   free(a);
   free(b);
@@ -138,21 +144,43 @@ int main (int argc, char **argv)
   MPI_Comm_size (MPI_COMM_WORLD, &sz);
   MPI_Comm_rank (MPI_COMM_WORLD, &myid);
 
-  if (argc != 3)
+  if (argc != 4)
   {
     if(myid==0)
-      fprintf(stderr, "Usage ./test length iterations\n");
+      fprintf(stderr, "Usage ./test length iterations [pow|dot]\n");
 
     exit(1);
   }
 
   const int testLen = atoi(argv[1]); 
   const int testIterations = atoi(argv[2]);
+  if(strcmp(argv[3], "dot")==0)
+  {
+    testOperation = &dotProduct;
+  }
+  else if(strcmp(argv[3], "pow")==0)
+  {
+    testOperation = &powTestOp;
+  }
+  else
+  {
+    if(myid==0)
+      fprintf(stderr, "Usage ./test length iterations [pow|dot]\n");
+
+    exit(1);
+  }
+
   //printf("testLen=%d\n", testLen);
 
   int j;
 
   srand((unsigned)time(NULL));
+
+  //double localResult, distributedResult;
+  double *localResults = (double *)malloc(testIterations * sizeof(double));
+  double *localDurations = (double *)malloc(testIterations * sizeof(double));
+  double *distributedResults = (double *)malloc(testIterations * sizeof(double));
+  double *distributedDurations = (double *)malloc(testIterations * sizeof(double));
 
   for(j=0;j<testIterations;j++)
   {
@@ -177,15 +205,19 @@ int main (int argc, char **argv)
         b[i]=((double)rand()/(double)RAND_MAX);
       }
 
-      double localResult, distributedResult;
+      
 
       double starttime, endtime;
-
+      printf(".");
+      fflush(stdout);
       starttime = MPI_Wtime();
-      localResult=dotProduct(a, b, testLen);
+      localResults[j]=testOperation(a, b, testLen);
       endtime = MPI_Wtime();
-      printf("Local result: %f\n", localResult);
-      printf("Computed in %0.4f ms \n", (endtime-starttime) * 1000);
+      printf(".");
+      fflush(stdout);
+      //printf("Local result: %f\n", localResult);
+      localDurations[j] = (endtime-starttime);
+      //printf("Computed in %0.4f ms \n", (endtime-starttime) * 1000);
 
       //distribute
       starttime = MPI_Wtime();
@@ -206,28 +238,30 @@ int main (int argc, char **argv)
       //compute partial result for master
       double partialResult;
 
-      partialResult=dotProduct(a, b, partitionLen);
+      partialResult=testOperation(a, b, partitionLen);
 
 
       // printf ("Hello, I am %d. My partial result is %f.\n", myid, partialResult);
 
       //combine results
-      distributedResult=partialResult;
+      distributedResults[j]=partialResult;
       for(i=1; i<sz; i++)
       {
         MPI_Recv(&partialResult, 1, MPI_DOUBLE, i, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        distributedResult += partialResult;
+        distributedResults[j] += partialResult;
       }
 
       endtime = MPI_Wtime();
 
+      distributedDurations[j] = (endtime-starttime);
+
       free(a);
       free(b);
 
-      printf ("Distributed result: %f\n", distributedResult);
-      printf("Computed in %0.4f ms \n", (endtime-starttime) * 1000);
+      //printf ("Distributed result: %f\n", distributedResult);
+      //printf("Computed in %0.4f ms \n", (endtime-starttime) * 1000);
 
-      sleep(2);
+      //sleep(2);
     } 
 
     //receive data and compute partial results
@@ -239,6 +273,42 @@ int main (int argc, char **argv)
       //printf("Size: %d, TestLen: %d, PartitionLen: %d\n", sz, testLen, partitionLen);
       workerTask(myid, partitionLen);
     }
+  }
+
+  if(myid == 0)
+  {
+    printf("\n");
+    double avgLocalDuration=0.0;
+    double avgDistributedDuration=0.0;
+    double avgSpeedup;
+    int i;
+    for(i=0; i<testIterations; i++)
+    {
+      avgLocalDuration+=localDurations[i];
+      avgDistributedDuration+=distributedDurations[i];
+
+      //check for correctness
+      double difference = fabs(localResults[i]-distributedResults[i]);
+      if(difference/localResults[i] > PRECISION)
+      {
+        if(myid==0)
+          fprintf(stderr, "FAILURE: Results out of range!\n");
+
+        exit(1);
+      }
+    }
+
+
+    avgLocalDuration = avgLocalDuration / (double)testIterations;
+    avgDistributedDuration = avgDistributedDuration / (double)testIterations;
+
+    avgSpeedup = avgLocalDuration/avgDistributedDuration;
+    printf("Processes=%d, Vector Size=%d, Computation=%s\n", sz, testLen, argv[3]);
+    printf("Average Local Computation Duration: %f\n", avgLocalDuration);
+    printf("Average Distributed Computation Duration: %f\n", avgDistributedDuration);
+    printf("Average Speedup: %f\n", avgSpeedup);
+
+
   }
 
   MPI_Finalize();
