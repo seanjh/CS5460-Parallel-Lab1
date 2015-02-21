@@ -30,7 +30,7 @@ typedef double (*TestOperationType)(double *, double *, int);
 
 #define ERR_BUFF_SIZE 1024
 
-#define PRECISION .000001
+#define PRECISION 0.000001
 
 double mult(double a, double b)
 {
@@ -286,11 +286,24 @@ int main (int argc, char **argv)
     {
       avgLocalDuration+=localDurations[i];
       avgDistributedDuration+=distributedDurations[i];
+
+      //check for correctness
+      double difference = fabs(localResults[i]-distributedResults[i]);
+      if(difference/localResults[i] > PRECISION)
+      {
+        if(myid==0)
+          fprintf(stderr, "FAILURE: Results out of range!\n");
+
+        exit(1);
+      }
     }
+
+
     avgLocalDuration = avgLocalDuration / (double)testIterations;
     avgDistributedDuration = avgDistributedDuration / (double)testIterations;
 
     avgSpeedup = avgLocalDuration/avgDistributedDuration;
+    printf("Processes=%d, Vector Size=%d, Computation=%s\n", sz, testLen, argv[3]);
     printf("Average Local Computation Duration: %f\n", avgLocalDuration);
     printf("Average Distributed Computation Duration: %f\n", avgDistributedDuration);
     printf("Average Speedup: %f\n", avgSpeedup);
