@@ -24,6 +24,9 @@
 
 typedef double (*seqOp)(double, double);
 typedef double (*reduceOp)(double, double);
+typedef double (*TestOperationType)(double *, double *, int);
+
+
 
 #define ERR_BUFF_SIZE 1024
 
@@ -52,15 +55,15 @@ double aggregate( double *a,
   return result;
 }
 
-double dotProductAgg(double *a, double *b, int len)
+double powTestOp(double *a, double *b, int len)
 {
   // int i;
   // double result = 0.0;
   // for (i=0; i<len; i++)
   //   result += a[i]*b[i];
   // return result;
-  //return aggregate(a, b, len, &pow, &sum);
-  return aggregate(a, b, len, &mult, &sum);
+  return aggregate(a, b, len, &pow, &sum);
+  //return aggregate(a, b, len, &mult, &sum);
 }
 
 double dotProduct(double *a, double *b, int len)
@@ -72,6 +75,7 @@ double dotProduct(double *a, double *b, int len)
   return result;
 }
 
+TestOperationType testOperation;
 
 void workerTask(int id, int maxLen)
 {
@@ -117,7 +121,9 @@ void workerTask(int id, int maxLen)
   assert(maxLen == a_len);
   assert(a_len == b_len);
 
-  partialResult=dotProduct(a, b, a_len);
+
+
+  partialResult=testOperation(a, b, a_len);
 
   free(a);
   free(b);
@@ -138,16 +144,32 @@ int main (int argc, char **argv)
   MPI_Comm_size (MPI_COMM_WORLD, &sz);
   MPI_Comm_rank (MPI_COMM_WORLD, &myid);
 
-  if (argc != 3)
+  if (argc != 4)
   {
     if(myid==0)
-      fprintf(stderr, "Usage ./test length iterations\n");
+      fprintf(stderr, "Usage ./test length iterations [pow|dot]\n");
 
     exit(1);
   }
 
   const int testLen = atoi(argv[1]); 
   const int testIterations = atoi(argv[2]);
+  if(strcmp(argv[3], "dot")==0)
+  {
+    testOperation = &dotProduct;
+  }
+  else if(strcmp(argv[3], "pow")==0)
+  {
+    testOperation = &powTestOp;
+  }
+  else
+  {
+    if(myid==0)
+      fprintf(stderr, "Usage ./test length iterations [pow|dot]\n");
+
+    exit(1);
+  }
+
   //printf("testLen=%d\n", testLen);
 
   int j;
@@ -188,7 +210,7 @@ int main (int argc, char **argv)
       double starttime, endtime;
 
       starttime = MPI_Wtime();
-      localResults[j]=dotProduct(a, b, testLen);
+      localResults[j]=testOperation(a, b, testLen);
       endtime = MPI_Wtime();
       //printf("Local result: %f\n", localResult);
       localDurations[j] = (endtime-starttime);
@@ -213,7 +235,7 @@ int main (int argc, char **argv)
       //compute partial result for master
       double partialResult;
 
-      partialResult=dotProduct(a, b, partitionLen);
+      partialResult=testOperation(a, b, partitionLen);
 
 
       // printf ("Hello, I am %d. My partial result is %f.\n", myid, partialResult);
