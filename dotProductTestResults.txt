@@ -2,200 +2,280 @@ make: `test' is up to date.
 ....................
 Processes=2, Vector Size=32, Computation=dot
 Average Local Computation Duration: 0.000001
+Average Local FLOPs: 116711067.826087
 Average Distributed Computation Duration: 0.000006
-Average Speedup: 0.094828
+Average Distributed FLOPs: 11138400.663900
+Average Speedup: 0.095436
 ....................
 Processes=4, Vector Size=32, Computation=dot
-Average Local Computation Duration: 0.000000
-Average Distributed Computation Duration: 0.000125
-Average Speedup: 0.003818
+Average Local Computation Duration: 0.000001
+Average Local FLOPs: 81344077.575758
+Average Distributed Computation Duration: 0.000013
+Average Distributed FLOPs: 5084004.848485
+Average Speedup: 0.062500
 ....................
 Processes=8, Vector Size=32, Computation=dot
 Average Local Computation Duration: 0.000000
-Average Distributed Computation Duration: 0.000502
-Average Speedup: 0.000190
+Average Local FLOPs: 206488812.307692
+Average Distributed Computation Duration: 0.000877
+Average Distributed FLOPs: 72982.098366
+Average Speedup: 0.000353
 ....................
 Processes=16, Vector Size=32, Computation=dot
 Average Local Computation Duration: 0.000000
-Average Distributed Computation Duration: 0.000344
-Average Speedup: 0.000902
+Average Local FLOPs: 223696213.333333
+Average Distributed Computation Duration: 0.000121
+Average Distributed FLOPs: 529562.943381
+Average Speedup: 0.002367
 ....................
 Processes=2, Vector Size=1024, Computation=dot
-Average Local Computation Duration: 0.000004
-Average Distributed Computation Duration: 0.000029
-Average Speedup: 0.131387
+Average Local Computation Duration: 0.000003
+Average Local FLOPs: 671088640.000000
+Average Distributed Computation Duration: 0.000011
+Average Distributed FLOPs: 179705744.602510
+Average Speedup: 0.267782
 ....................
 Processes=4, Vector Size=1024, Computation=dot
 Average Local Computation Duration: 0.000003
-Average Distributed Computation Duration: 0.000044
-Average Speedup: 0.071197
+Average Local FLOPs: 660764199.384615
+Average Distributed Computation Duration: 0.000077
+Average Distributed FLOPs: 26602460.799009
+Average Speedup: 0.040260
 ....................
 Processes=8, Vector Size=1024, Computation=dot
-Average Local Computation Duration: 0.000004
-Average Distributed Computation Duration: 0.000440
-Average Speedup: 0.009369
+Average Local Computation Duration: 0.000006
+Average Local FLOPs: 319328423.494424
+Average Distributed Computation Duration: 0.000024
+Average Distributed FLOPs: 85387023.777336
+Average Speedup: 0.267396
 ....................
 Processes=16, Vector Size=1024, Computation=dot
 Average Local Computation Duration: 0.000004
-Average Distributed Computation Duration: 0.000246
-Average Speedup: 0.015038
+Average Local FLOPs: 493674401.839081
+Average Distributed Computation Duration: 0.000152
+Average Distributed FLOPs: 13446985.898560
+Average Speedup: 0.027239
 ....................
 Processes=2, Vector Size=32768, Computation=dot
-Average Local Computation Duration: 0.000096
-Average Distributed Computation Duration: 0.000124
-Average Speedup: 0.773516
+Average Local Computation Duration: 0.000105
+Average Local FLOPs: 621473902.202125
+Average Distributed Computation Duration: 0.000235
+Average Distributed FLOPs: 279148884.882705
+Average Speedup: 0.449172
 ....................
 Processes=4, Vector Size=32768, Computation=dot
-Average Local Computation Duration: 0.000109
-Average Distributed Computation Duration: 0.000196
-Average Speedup: 0.553558
+Average Local Computation Duration: 0.000103
+Average Local FLOPs: 639250946.381395
+Average Distributed Computation Duration: 0.000188
+Average Distributed FLOPs: 348564426.761349
+Average Speedup: 0.545270
 ....................
 Processes=8, Vector Size=32768, Computation=dot
-Average Local Computation Duration: 0.000123
-Average Distributed Computation Duration: 0.000329
-Average Speedup: 0.372702
+Average Local Computation Duration: 0.000126
+Average Local FLOPs: 519814498.759455
+Average Distributed Computation Duration: 0.000450
+Average Distributed FLOPs: 145476531.857105
+Average Speedup: 0.279862
 ....................
 Processes=16, Vector Size=32768, Computation=dot
-Average Local Computation Duration: 0.000115
-Average Distributed Computation Duration: 0.000688
-Average Speedup: 0.166753
+Average Local Computation Duration: 0.000114
+Average Local FLOPs: 573020443.910778
+Average Distributed Computation Duration: 0.000714
+Average Distributed FLOPs: 91778933.871119
+Average Speedup: 0.160167
 ....................
 Processes=2, Vector Size=1048576, Computation=dot
-Average Local Computation Duration: 0.003058
-Average Distributed Computation Duration: 0.004547
-Average Speedup: 0.672406
+Average Local Computation Duration: 0.003130
+Average Local FLOPs: 669953921.901077
+Average Distributed Computation Duration: 0.004950
+Average Distributed FLOPs: 423699820.917332
+Average Speedup: 0.632431
 ....................
 Processes=4, Vector Size=1048576, Computation=dot
-Average Local Computation Duration: 0.003054
-Average Distributed Computation Duration: 0.003290
-Average Speedup: 0.928209
+Average Local Computation Duration: 0.003116
+Average Local FLOPs: 672988402.794754
+Average Distributed Computation Duration: 0.003785
+Average Distributed FLOPs: 554109032.978336
+Average Speedup: 0.823356
 ....................
 Processes=8, Vector Size=1048576, Computation=dot
-Average Local Computation Duration: 0.004142
-Average Distributed Computation Duration: 0.003772
-Average Speedup: 1.097927
+Average Local Computation Duration: 0.004130
+Average Local FLOPs: 507725649.929753
+Average Distributed Computation Duration: 0.004401
+Average Distributed FLOPs: 476512815.881859
+Average Speedup: 0.938524
 ....................
 Processes=16, Vector Size=1048576, Computation=dot
-Average Local Computation Duration: 0.003663
-Average Distributed Computation Duration: 0.006224
-Average Speedup: 0.588545
+Average Local Computation Duration: 0.003717
+Average Local FLOPs: 564130565.869564
+Average Distributed Computation Duration: 0.006779
+Average Distributed FLOPs: 309379524.828464
+Average Speedup: 0.548418
 ....................
 Processes=2, Vector Size=33554432, Computation=dot
-Average Local Computation Duration: 0.102680
-Average Distributed Computation Duration: 0.149475
-Average Speedup: 0.686936
+Average Local Computation Duration: 0.106673
+Average Local FLOPs: 629106546.174393
+Average Distributed Computation Duration: 0.170900
+Average Distributed FLOPs: 392679820.741638
+Average Speedup: 0.624187
 ....................
 Processes=4, Vector Size=33554432, Computation=dot
-Average Local Computation Duration: 0.102396
-Average Distributed Computation Duration: 0.168091
-Average Speedup: 0.609170
+Average Local Computation Duration: 0.106318
+Average Local FLOPs: 631206617.137373
+Average Distributed Computation Duration: 0.199111
+Average Distributed FLOPs: 337043064.534644
+Average Speedup: 0.533966
 ....................
 Processes=8, Vector Size=33554432, Computation=dot
-Average Local Computation Duration: 0.135326
-Average Distributed Computation Duration: 0.214981
-Average Speedup: 0.629482
+Average Local Computation Duration: 0.138628
+Average Local FLOPs: 484093703.265379
+Average Distributed Computation Duration: 0.248304
+Average Distributed FLOPs: 270269028.209239
+Average Speedup: 0.558299
 ....................
 Processes=16, Vector Size=33554432, Computation=dot
-Average Local Computation Duration: 0.124900
-Average Distributed Computation Duration: 0.278329
-Average Speedup: 0.448748
+Average Local Computation Duration: 0.127358
+Average Local FLOPs: 526932731.217495
+Average Distributed Computation Duration: 0.316906
+Average Distributed FLOPs: 211762410.125126
+Average Speedup: 0.401878
 ....................
 Processes=2, Vector Size=32, Computation=pow
-Average Local Computation Duration: 0.000008
+Average Local Computation Duration: 0.000009
+Average Local FLOPs: 6778673.131313
 Average Distributed Computation Duration: 0.000007
-Average Speedup: 1.142857
+Average Distributed FLOPs: 8772400.522876
+Average Speedup: 1.294118
 ....................
 Processes=4, Vector Size=32, Computation=pow
-Average Local Computation Duration: 0.000010
-Average Distributed Computation Duration: 0.000015
-Average Speedup: 0.662903
+Average Local Computation Duration: 0.000012
+Average Local FLOPs: 5523363.292181
+Average Distributed Computation Duration: 0.000013
+Average Distributed FLOPs: 4998798.063315
+Average Speedup: 0.905028
 ....................
 Processes=8, Vector Size=32, Computation=pow
 Average Local Computation Duration: 0.000012
-Average Distributed Computation Duration: 0.000048
-Average Speedup: 0.245491
+Average Local FLOPs: 5433916.113360
+Average Distributed Computation Duration: 0.000271
+Average Distributed FLOPs: 235821.361680
+Average Speedup: 0.043398
 ....................
 Processes=16, Vector Size=32, Computation=pow
-Average Local Computation Duration: 0.000013
-Average Distributed Computation Duration: 0.000230
-Average Speedup: 0.058097
+Average Local Computation Duration: 0.000012
+Average Local FLOPs: 5478274.612245
+Average Distributed Computation Duration: 0.000360
+Average Distributed FLOPs: 177889.632869
+Average Speedup: 0.032472
 ....................
 Processes=2, Vector Size=1024, Computation=pow
-Average Local Computation Duration: 0.000101
-Average Distributed Computation Duration: 0.000062
-Average Speedup: 1.634615
+Average Local Computation Duration: 0.000129
+Average Local FLOPs: 15842741.777942
+Average Distributed Computation Duration: 0.000097
+Average Distributed FLOPs: 21141852.306178
+Average Speedup: 1.334482
 ....................
 Processes=4, Vector Size=1024, Computation=pow
-Average Local Computation Duration: 0.000107
-Average Distributed Computation Duration: 0.000045
-Average Speedup: 2.381586
+Average Local Computation Duration: 0.000096
+Average Local FLOPs: 21288561.566295
+Average Distributed Computation Duration: 0.000048
+Average Distributed FLOPs: 42735992.995025
+Average Speedup: 2.007463
 ....................
 Processes=8, Vector Size=1024, Computation=pow
-Average Local Computation Duration: 0.000120
-Average Distributed Computation Duration: 0.000249
-Average Speedup: 0.480616
+Average Local Computation Duration: 0.000127
+Average Local FLOPs: 16125276.125399
+Average Distributed Computation Duration: 0.000043
+Average Distributed FLOPs: 47431996.642739
+Average Speedup: 2.941469
 ....................
 Processes=16, Vector Size=1024, Computation=pow
-Average Local Computation Duration: 0.000129
-Average Distributed Computation Duration: 0.000333
-Average Speedup: 0.387843
+Average Local Computation Duration: 0.000131
+Average Local FLOPs: 15575584.029012
+Average Distributed Computation Duration: 0.000275
+Average Distributed FLOPs: 7455246.130880
+Average Speedup: 0.478650
 ....................
 Processes=2, Vector Size=32768, Computation=pow
-Average Local Computation Duration: 0.002833
-Average Distributed Computation Duration: 0.001502
-Average Speedup: 1.885436
+Average Local Computation Duration: 0.002818
+Average Local FLOPs: 23252961.369742
+Average Distributed Computation Duration: 0.001493
+Average Distributed FLOPs: 43896184.436921
+Average Speedup: 1.887767
 ....................
 Processes=4, Vector Size=32768, Computation=pow
-Average Local Computation Duration: 0.002877
-Average Distributed Computation Duration: 0.000847
-Average Speedup: 3.395127
+Average Local Computation Duration: 0.002813
+Average Local FLOPs: 23298686.806577
+Average Distributed Computation Duration: 0.000875
+Average Distributed FLOPs: 74902694.137010
+Average Speedup: 3.214889
 ....................
 Processes=8, Vector Size=32768, Computation=pow
-Average Local Computation Duration: 0.003681
-Average Distributed Computation Duration: 0.000686
-Average Speedup: 5.365604
+Average Local Computation Duration: 0.003710
+Average Local FLOPs: 17664312.967123
+Average Distributed Computation Duration: 0.000693
+Average Distributed FLOPs: 94625600.517746
+Average Speedup: 5.356880
 ....................
 Processes=16, Vector Size=32768, Computation=pow
-Average Local Computation Duration: 0.003545
-Average Distributed Computation Duration: 0.001567
-Average Speedup: 2.262349
+Average Local Computation Duration: 0.003524
+Average Local FLOPs: 18597334.795440
+Average Distributed Computation Duration: 0.001085
+Average Distributed FLOPs: 60412726.800879
+Average Speedup: 3.248462
 ....................
 Processes=2, Vector Size=1048576, Computation=pow
-Average Local Computation Duration: 0.089092
-Average Distributed Computation Duration: 0.047560
-Average Speedup: 1.873239
+Average Local Computation Duration: 0.089030
+Average Local FLOPs: 23555684.455202
+Average Distributed Computation Duration: 0.047839
+Average Distributed FLOPs: 43837423.597840
+Average Speedup: 1.861013
 ....................
 Processes=4, Vector Size=1048576, Computation=pow
-Average Local Computation Duration: 0.089056
-Average Distributed Computation Duration: 0.024687
-Average Speedup: 3.607407
+Average Local Computation Duration: 0.089370
+Average Local FLOPs: 23466034.960202
+Average Distributed Computation Duration: 0.025155
+Average Distributed FLOPs: 83368967.492588
+Average Speedup: 3.552751
 ....................
 Processes=8, Vector Size=1048576, Computation=pow
-Average Local Computation Duration: 0.118328
-Average Distributed Computation Duration: 0.017972
-Average Speedup: 6.584116
+Average Local Computation Duration: 0.122015
+Average Local FLOPs: 17187650.624263
+Average Distributed Computation Duration: 0.018459
+Average Distributed FLOPs: 113608504.560669
+Average Speedup: 6.609891
 ....................
 Processes=16, Vector Size=1048576, Computation=pow
-Average Local Computation Duration: 0.113932
-Average Distributed Computation Duration: 0.121555
-Average Speedup: 0.937287
+Average Local Computation Duration: 0.113411
+Average Local FLOPs: 18491610.586709
+Average Distributed Computation Duration: 0.032970
+Average Distributed FLOPs: 63608669.244984
+Average Speedup: 3.439866
 ....................
 Processes=2, Vector Size=33554432, Computation=pow
-Average Local Computation Duration: 2.857815
-Average Distributed Computation Duration: 1.524533
-Average Speedup: 1.874551
+Average Local Computation Duration: 2.858283
+Average Local FLOPs: 23478730.900620
+Average Distributed Computation Duration: 1.538499
+Average Distributed FLOPs: 43619708.989401
+Average Speedup: 1.857839
 ....................
 Processes=4, Vector Size=33554432, Computation=pow
-Average Local Computation Duration: 2.865445
-Average Distributed Computation Duration: 0.856864
-Average Speedup: 3.344106
+Average Local Computation Duration: 2.859858
+Average Local FLOPs: 23465804.312479
+Average Distributed Computation Duration: 0.882732
+Average Distributed FLOPs: 76024088.709026
+Average Speedup: 3.239782
 ....................
 Processes=8, Vector Size=33554432, Computation=pow
-Average Local Computation Duration: 3.814419
-Average Distributed Computation Duration: 0.761281
-Average Speedup: 5.010529
+Average Local Computation Duration: 3.744738
+Average Local FLOPs: 17920841.851386
+Average Distributed Computation Duration: 0.693819
+Average Distributed FLOPs: 96723837.900028
+Average Speedup: 5.397282
 ....................
 Processes=16, Vector Size=33554432, Computation=pow
-Average Local Computation Duration: 3.590955
-Average Distributed Computation Duration: 2.846486
-Average Speedup: 1.261540
+Average Local Computation Duration: 3.622205
+Average Local FLOPs: 18527075.839186
+Average Distributed Computation Duration: 1.421790
+Average Distributed FLOPs: 47200270.661970
+Average Speedup: 2.547637
