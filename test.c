@@ -305,7 +305,9 @@ int main (int argc, char **argv)
     avgSpeedup = avgLocalDuration/avgDistributedDuration;
     printf("Processes=%d, Vector Size=%d, Computation=%s\n", sz, testLen, argv[3]);
     printf("Average Local Computation Duration: %f\n", avgLocalDuration);
+    printf("Average Local FLOPs: %f\n", ((double)testLen*2.0)/avgLocalDuration);
     printf("Average Distributed Computation Duration: %f\n", avgDistributedDuration);
+    printf("Average Distributed FLOPs: %f\n", ((double)testLen*2.0)/avgDistributedDuration);
     printf("Average Speedup: %f\n", avgSpeedup);
 
 
