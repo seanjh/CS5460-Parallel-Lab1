@@ -1,0 +1,229 @@
+#0: LATENCY TEST.
+#0: Sending 1000 total 1 byte messages between 0 and 1
+    #1: Average latency between process 0 and 1 after 1000 messages is 33.137560 µs
+
+#0: BANDWIDTH TEST.
+#0: Sending 10000 total MB between 0 and 1. Packet size 100 bytes.
+    #1: Time elapsed: 17.88265991 seconds. Total MB transferred: 10000.00000000
+    #1: 559.20093 MB / second
+#0: Sending 10000 total MB between 0 and 1. Packet size 1000 bytes.
+    #1: Time elapsed: 2.34540701 seconds. Total MB transferred: 10000.00000000
+    #1: 4263.65230 MB / second
+#0: Sending 10000 total MB between 0 and 1. Packet size 1000000 bytes.
+    #1: Time elapsed: 1.06026816 seconds. Total MB transferred: 10000.00000000
+    #1: 9431.57622 MB / second
+#0: Sending 10000 total MB between 0 and 1. Packet size 1000000000 bytes.
+    #1: Time elapsed: 1.85579896 seconds. Total MB transferred: 10000.00000000
+    #1: 5388.51471 MB / second
+
+
+#0: LATENCY TEST.
+#0: Sending 1000 total 1 byte messages between 0 and 1
+#2: Sending 1000 total 1 byte messages between 2 and 3
+    #3: Average latency between process 2 and 3 after 1000 messages is 34.133434 µs
+    #1: Average latency between process 0 and 1 after 1000 messages is 34.623146 µs
+#2: Sending 10000 total MB between 2 and 3. Packet size 100 bytes.
+
+#0: BANDWIDTH TEST.
+#0: Sending 10000 total MB between 0 and 1. Packet size 100 bytes.
+    #3: Time elapsed: 16.82405591 seconds. Total MB transferred: 10000.00000000
+    #3: 594.38699 MB / second
+    #1: Time elapsed: 18.82647204 seconds. Total MB transferred: 10000.00000000
+    #1: 531.16696 MB / second
+#0: Sending 10000 total MB between 0 and 1. Packet size 1000 bytes.
+#2: Sending 10000 total MB between 2 and 3. Packet size 1000 bytes.
+    #3: Time elapsed: 2.38916087 seconds. Total MB transferred: 10000.00000000
+    #3: 4185.56997 MB / second
+    #1: Time elapsed: 2.59758496 seconds. Total MB transferred: 10000.00000000
+    #1: 3849.72971 MB / second
+#0: Sending 10000 total MB between 0 and 1. Packet size 1000000 bytes.
+#2: Sending 10000 total MB between 2 and 3. Packet size 1000000 bytes.
+    #1: Time elapsed: 1.08888292 seconds. Total MB transferred: 10000.00000000
+    #1: 9183.72378 MB / second
+    #3: Time elapsed: 1.13778090 seconds. Total MB transferred: 10000.00000000
+    #3: 8789.03834 MB / second
+#2: Sending 10000 total MB between 2 and 3. Packet size 1000000000 bytes.
+#0: Sending 10000 total MB between 0 and 1. Packet size 1000000000 bytes.
+    #1: Time elapsed: 1.91396904 seconds. Total MB transferred: 10000.00000000
+    #1: 5224.74491 MB / second
+    #3: Time elapsed: 1.94731402 seconds. Total MB transferred: 10000.00000000
+    #3: 5135.27858 MB / second
+
+
+#0: LATENCY TEST.
+#0: Sending 1000 total 1 byte messages between 0 and 1
+#2: Sending 1000 total 1 byte messages between 2 and 3
+#6: Sending 1000 total 1 byte messages between 6 and 7
+#4: Sending 1000 total 1 byte messages between 4 and 5
+    #3: Average latency between process 2 and 3 after 1000 messages is 58.448792 µs
+    #7: Average latency between process 6 and 7 after 1000 messages is 58.253288 µs
+    #5: Average latency between process 4 and 5 after 1000 messages is 53.318262 µs
+    #1: Average latency between process 0 and 1 after 1000 messages is 58.470488 µs
+
+#0: BANDWIDTH TEST.
+#0: Sending 10000 total MB between 0 and 1. Packet size 100 bytes.
+#4: Sending 10000 total MB between 4 and 5. Packet size 100 bytes.
+#6: Sending 10000 total MB between 6 and 7. Packet size 100 bytes.
+#2: Sending 10000 total MB between 2 and 3. Packet size 100 bytes.
+    #5: Time elapsed: 30.16840291 seconds. Total MB transferred: 10000.00000000
+    #5: 331.47263 MB / second
+    #7: Time elapsed: 30.97979403 seconds. Total MB transferred: 10000.00000000
+    #7: 322.79104 MB / second
+    #1: Time elapsed: 31.93959093 seconds. Total MB transferred: 10000.00000000
+    #1: 313.09105 MB / second
+    #3: Time elapsed: 32.30816793 seconds. Total MB transferred: 10000.00000000
+    #3: 309.51925 MB / second
+#4: Sending 10000 total MB between 4 and 5. Packet size 1000 bytes.
+#0: Sending 10000 total MB between 0 and 1. Packet size 1000 bytes.
+#6: Sending 10000 total MB between 6 and 7. Packet size 1000 bytes.
+#2: Sending 10000 total MB between 2 and 3. Packet size 1000 bytes.
+    #5: Time elapsed: 4.54171395 seconds. Total MB transferred: 10000.00000000
+    #5: 2201.81194 MB / second
+    #3: Time elapsed: 4.83968997 seconds. Total MB transferred: 10000.00000000
+    #3: 2066.24806 MB / second
+    #1: Time elapsed: 5.05806613 seconds. Total MB transferred: 10000.00000000
+    #1: 1977.04019 MB / second
+    #7: Time elapsed: 5.34924912 seconds. Total MB transferred: 10000.00000000
+    #7: 1869.42125 MB / second
+#6: Sending 10000 total MB between 6 and 7. Packet size 1000000 bytes.
+#4: Sending 10000 total MB between 4 and 5. Packet size 1000000 bytes.
+#0: Sending 10000 total MB between 0 and 1. Packet size 1000000 bytes.
+#2: Sending 10000 total MB between 2 and 3. Packet size 1000000 bytes.
+    #5: Time elapsed: 0.98893094 seconds. Total MB transferred: 10000.00000000
+    #5: 10111.92955 MB / second
+    #7: Time elapsed: 1.80789614 seconds. Total MB transferred: 10000.00000000
+    #7: 5531.29120 MB / second
+    #3: Time elapsed: 2.19188905 seconds. Total MB transferred: 10000.00000000
+    #3: 4562.27472 MB / second
+    #1: Time elapsed: 2.19515991 seconds. Total MB transferred: 10000.00000000
+    #1: 4555.47678 MB / second
+#6: Sending 10000 total MB between 6 and 7. Packet size 1000000000 bytes.
+#0: Sending 10000 total MB between 0 and 1. Packet size 1000000000 bytes.
+#4: Sending 10000 total MB between 4 and 5. Packet size 1000000000 bytes.
+#2: Sending 10000 total MB between 2 and 3. Packet size 1000000000 bytes.
+    #5: Time elapsed: 1.89613605 seconds. Total MB transferred: 10000.00000000
+    #5: 5273.88318 MB / second
+    #7: Time elapsed: 2.57697606 seconds. Total MB transferred: 10000.00000000
+    #7: 3880.51723 MB / second
+    #3: Time elapsed: 3.35400605 seconds. Total MB transferred: 10000.00000000
+    #3: 2981.50923 MB / second
+    #1: Time elapsed: 3.35607791 seconds. Total MB transferred: 10000.00000000
+    #1: 2979.66861 MB / second
+
+
+#14: Sending 1000 total 1 byte messages between 14 and 15
+#4: Sending 1000 total 1 byte messages between 4 and 5
+#6: Sending 1000 total 1 byte messages between 6 and 7
+
+#0: LATENCY TEST.
+#0: Sending 1000 total 1 byte messages between 0 and 1
+#2: Sending 1000 total 1 byte messages between 2 and 3
+#10: Sending 1000 total 1 byte messages between 10 and 11
+#8: Sending 1000 total 1 byte messages between 8 and 9
+#12: Sending 1000 total 1 byte messages between 12 and 13
+    #7: Average latency between process 6 and 7 after 1000 messages is 220.788717 µs
+    #11: Average latency between process 10 and 11 after 1000 messages is 2043.619871 µs
+    #15: Average latency between process 14 and 15 after 1000 messages is 1792.913914 µs
+    #5: Average latency between process 4 and 5 after 1000 messages is 986.496925 µs
+    #13: Average latency between process 12 and 13 after 1000 messages is 7041.931629 µs
+    #3: Average latency between process 2 and 3 after 1000 messages is 7193.107128 µs
+    #9: Average latency between process 8 and 9 after 1000 messages is 2800.479889 µs
+    #1: Average latency between process 0 and 1 after 1000 messages is 2697.077274 µs
+#6: Sending 10000 total MB between 6 and 7. Packet size 100 bytes.
+
+#0: BANDWIDTH TEST.
+#0: Sending 10000 total MB between 0 and 1. Packet size 100 bytes.
+#2: Sending 10000 total MB between 2 and 3. Packet size 100 bytes.
+#8: Sending 10000 total MB between 8 and 9. Packet size 100 bytes.
+#14: Sending 10000 total MB between 14 and 15. Packet size 100 bytes.
+#4: Sending 10000 total MB between 4 and 5. Packet size 100 bytes.
+#12: Sending 10000 total MB between 12 and 13. Packet size 100 bytes.
+#10: Sending 10000 total MB between 10 and 11. Packet size 100 bytes.
+    #1: Time elapsed: 249.50599790 seconds. Total MB transferred: 10000.00000000
+    #1: 40.07920 MB / second
+    #3: Time elapsed: 267.53260207 seconds. Total MB transferred: 10000.00000000
+    #3: 37.37862 MB / second
+    #11: Time elapsed: 332.28027201 seconds. Total MB transferred: 10000.00000000
+    #11: 30.09508 MB / second
+    #13: Time elapsed: 407.35187697 seconds. Total MB transferred: 10000.00000000
+    #13: 24.54880 MB / second
+    #7: Time elapsed: 453.38879704 seconds. Total MB transferred: 10000.00000000
+    #7: 22.05613 MB / second
+    #5: Time elapsed: 498.67692614 seconds. Total MB transferred: 10000.00000000
+    #5: 20.05306 MB / second
+    #9: Time elapsed: 502.42815590 seconds. Total MB transferred: 10000.00000000
+    #9: 19.90334 MB / second
+    #15: Time elapsed: 538.03610802 seconds. Total MB transferred: 10000.00000000
+    #15: 18.58611 MB / second
+#12: Sending 10000 total MB between 12 and 13. Packet size 1000 bytes.
+#10: Sending 10000 total MB between 10 and 11. Packet size 1000 bytes.
+#6: Sending 10000 total MB between 6 and 7. Packet size 1000 bytes.
+#8: Sending 10000 total MB between 8 and 9. Packet size 1000 bytes.
+#0: Sending 10000 total MB between 0 and 1. Packet size 1000 bytes.
+#2: Sending 10000 total MB between 2 and 3. Packet size 1000 bytes.
+#14: Sending 10000 total MB between 14 and 15. Packet size 1000 bytes.
+#4: Sending 10000 total MB between 4 and 5. Packet size 1000 bytes.
+    #13: Time elapsed: 25.41375804 seconds. Total MB transferred: 10000.00000000
+    #13: 393.48765 MB / second
+    #15: Time elapsed: 44.10681796 seconds. Total MB transferred: 10000.00000000
+    #15: 226.72232 MB / second
+    #7: Time elapsed: 47.51272607 seconds. Total MB transferred: 10000.00000000
+    #7: 210.46993 MB / second
+    #3: Time elapsed: 51.36794019 seconds. Total MB transferred: 10000.00000000
+    #3: 194.67395 MB / second
+    #9: Time elapsed: 54.84964800 seconds. Total MB transferred: 10000.00000000
+    #9: 182.31658 MB / second
+    #11: Time elapsed: 57.24103880 seconds. Total MB transferred: 10000.00000000
+    #11: 174.69983 MB / second
+    #5: Time elapsed: 61.25005078 seconds. Total MB transferred: 10000.00000000
+    #5: 163.26517 MB / second
+    #1: Time elapsed: 67.75624013 seconds. Total MB transferred: 10000.00000000
+    #1: 147.58788 MB / second
+#4: Sending 10000 total MB between 4 and 5. Packet size 1000000 bytes.
+#12: Sending 10000 total MB between 12 and 13. Packet size 1000000 bytes.
+#10: Sending 10000 total MB between 10 and 11. Packet size 1000000 bytes.
+#2: Sending 10000 total MB between 2 and 3. Packet size 1000000 bytes.
+#8: Sending 10000 total MB between 8 and 9. Packet size 1000000 bytes.
+#0: Sending 10000 total MB between 0 and 1. Packet size 1000000 bytes.
+#14: Sending 10000 total MB between 14 and 15. Packet size 1000000 bytes.
+#6: Sending 10000 total MB between 6 and 7. Packet size 1000000 bytes.
+    #1: Time elapsed: 3.78611493 seconds. Total MB transferred: 10000.00000000
+    #1: 2641.22991 MB / second
+    #5: Time elapsed: 3.84748816 seconds. Total MB transferred: 10000.00000000
+    #5: 2599.09831 MB / second
+    #13: Time elapsed: 4.37303090 seconds. Total MB transferred: 10000.00000000
+    #13: 2286.74350 MB / second
+    #11: Time elapsed: 4.62178588 seconds. Total MB transferred: 10000.00000000
+    #11: 2163.66579 MB / second
+    #15: Time elapsed: 4.70328808 seconds. Total MB transferred: 10000.00000000
+    #15: 2126.17212 MB / second
+    #7: Time elapsed: 4.71743989 seconds. Total MB transferred: 10000.00000000
+    #7: 2119.79384 MB / second
+    #9: Time elapsed: 4.75994086 seconds. Total MB transferred: 10000.00000000
+    #9: 2100.86644 MB / second
+    #3: Time elapsed: 4.89927602 seconds. Total MB transferred: 10000.00000000
+    #3: 2041.11790 MB / second
+#2: Sending 10000 total MB between 2 and 3. Packet size 1000000000 bytes.
+#4: Sending 10000 total MB between 4 and 5. Packet size 1000000000 bytes.
+#12: Sending 10000 total MB between 12 and 13. Packet size 1000000000 bytes.
+#10: Sending 10000 total MB between 10 and 11. Packet size 1000000000 bytes.
+#0: Sending 10000 total MB between 0 and 1. Packet size 1000000000 bytes.
+#8: Sending 10000 total MB between 8 and 9. Packet size 1000000000 bytes.
+#6: Sending 10000 total MB between 6 and 7. Packet size 1000000000 bytes.
+#14: Sending 10000 total MB between 14 and 15. Packet size 1000000000 bytes.
+    #13: Time elapsed: 4.40170813 seconds. Total MB transferred: 10000.00000000
+    #13: 2271.84532 MB / second
+    #5: Time elapsed: 5.52817082 seconds. Total MB transferred: 10000.00000000
+    #5: 1808.91661 MB / second
+    #1: Time elapsed: 5.53382206 seconds. Total MB transferred: 10000.00000000
+    #1: 1807.06931 MB / second
+    #11: Time elapsed: 6.10229993 seconds. Total MB transferred: 10000.00000000
+    #11: 1638.72640 MB / second
+    #3: Time elapsed: 6.81816506 seconds. Total MB transferred: 10000.00000000
+    #3: 1466.67027 MB / second
+    #7: Time elapsed: 7.01724887 seconds. Total MB transferred: 10000.00000000
+    #7: 1425.05990 MB / second
+    #15: Time elapsed: 7.01787519 seconds. Total MB transferred: 10000.00000000
+    #15: 1424.93272 MB / second
+    #9: Time elapsed: 7.80045605 seconds. Total MB transferred: 10000.00000000
+    #9: 1281.97633 MB / second
