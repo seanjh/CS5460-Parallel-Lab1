@@ -35,6 +35,7 @@ hello
 profile
 test
 test_comm
+maxLenTest
 
 # Sublime Text
 *.sublime*
